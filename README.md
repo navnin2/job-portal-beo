@@ -41,6 +41,23 @@ No need to migration on DB
 ### 3. Run the Command  to run the code.
 
 ```bash
-Npm run dev // npm start
+npm run dev // npm start
 ```
+
+### 4. Shedule Cron job 
+
+```bash
+the shedule task will be runing as the cron time is implimented.
+the cron job is set the /cron folder
+```
+
+### 5. Documentation of the API
+
+The documentation is set in the 
+
+```bash
+http://localhost:${port}/api-docs
+```
+
+the port will be as per defined in the ENV file
 
