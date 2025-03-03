@@ -69,6 +69,7 @@ const PortalControler = {
         try {
             const portalSql = `SELECT 
             j.portal_id,
+            jp.name as portal_name,
             COUNT(j.id) AS total_jobs_posted,
             MAX(j.createdAt) AS last_posted_date,
             SUM(CASE WHEN j.createdAt >= DATEADD(DAY, -7, GETDATE()) THEN 1 ELSE 0 END) AS jobs_last_week,
@@ -76,7 +77,8 @@ const PortalControler = {
             SUM(CASE WHEN j.createdAt >= DATEADD(DAY, -365, GETDATE()) THEN 1 ELSE 0 END) AS jobs_last_year,
             SUM(CASE WHEN j.status = 'active' THEN 1 ELSE 0 END) AS active_jobs
             FROM Jobs j
-            GROUP BY j.portal_id
+            LEFT JOIN job_portals jp ON jp.id = j.portal_id
+            GROUP BY j.portal_id, jp.name
             ORDER BY total_jobs_posted DESC;`
 
             const portal = await sequelize.query(portalSql, { type: sequelize.QueryTypes.SELECT })

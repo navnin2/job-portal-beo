@@ -3,12 +3,15 @@ const portalRoutes = require('./routes/portal')
 const userRoutes = require('./routes/user')
 const authRoutes = require("./routes/auth")
 const jobRoutes = require("./routes/job")
-require("dotenv").config();
 const swagger = require('./config/swagger')
+const { cleanUp, analyticsTask } = require("./cron/cleanupSummary")
+require("dotenv").config();
 
 const app = express()
 app.use(express.json());
 
+cleanUp.start()
+analyticsTask.start()
 app.use("/api/auth", authRoutes)
 app.use("/api/portals", portalRoutes);
 app.use('/users', userRoutes);
