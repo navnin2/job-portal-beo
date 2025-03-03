@@ -8,7 +8,7 @@ const moment = require("moment");
 
 const JobControler = {
     // Create Job
-    createPortal: async (req, res) => {
+    createJob: async (req, res) => {
         try {
             const { title, description, status, portal_id } = req.body;
             console.log(req.user)
@@ -21,7 +21,7 @@ const JobControler = {
     },
 
     // Get All Job
-    getPortals: async (req, res) => {
+    getJobs: async (req, res) => {
         try {
             const portals = await Job.findAll();
             res.status(200).json(portals);
@@ -31,7 +31,7 @@ const JobControler = {
     },
 
     // Get Single Job
-    getPortalById: async (req, res) => {
+    getJobById: async (req, res) => {
         try {
             const portal = await Job.findByPk(req.params.id);
             if (!portal) return res.status(404).json({ error: 'Portal not found' });
@@ -42,7 +42,7 @@ const JobControler = {
     },
 
     // Update Job
-    updatePortal: async (req, res) => {
+    updateJob: async (req, res) => {
         try {
             const { name, description, status } = req.body;
             const portal = await Job.findByPk(req.params.id);
@@ -56,7 +56,7 @@ const JobControler = {
     },
 
     // Delete Job
-    deletePortal: async (req, res) => {
+    deleteJob: async (req, res) => {
         try {
             const portal = await Job.findByPk(req.params.id);
             if (!portal) return res.status(404).json({ error: 'Portal not found' });
