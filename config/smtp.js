@@ -3,12 +3,13 @@ const path = require("path");
 require("dotenv").config();
 
 async function configureHandlebars() {
-  const { nodemailerExpressHandlebars } = await import("nodemailer-express-handlebars");
+  const { nodemailerExpressHandlebars } = await import(
+    "nodemailer-express-handlebars"
+  );
 
   const transporter = nodemailer.createTransport({
     host: process.env.SMTP_HOST,
     port: process.env.SMTP_PORT,
-    secure: false,
     auth: {
       user: process.env.SMTP_USER,
       pass: process.env.SMTP_PASS,
@@ -19,11 +20,11 @@ async function configureHandlebars() {
   const handlebarsOptions = {
     viewEngine: {
       extname: ".hbs",
-      partialsDir: path.resolve("./views/emails"),
-      layoutsDir: path.resolve("./views/emails"),
+      partialsDir: path.resolve("./template"),
+      layoutsDir: path.resolve("./template"),
       defaultLayout: "",
     },
-    viewPath: path.resolve("./views/emails"),
+    viewPath: path.resolve("./template"),
     extName: ".hbs",
   };
 
